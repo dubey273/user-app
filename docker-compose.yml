@@ -1,0 +1,12 @@
+services:
+  user-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: host.docker.internal:24224
+        tag: user-app
