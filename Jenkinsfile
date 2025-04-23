@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         // Make sure this matches the JDK installed in Jenkins
-        jdk 'jdk-23.0.1'
+        jdk 'jdk-23.0.2'
     }
 
     environment {
