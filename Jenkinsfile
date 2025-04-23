@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-username/your-gradle-project.git'
+                git 'https://github.com/dubey273/user-app'
             }
         }
 
