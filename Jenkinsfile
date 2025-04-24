@@ -1,5 +1,5 @@
 pipeline {
-
+    agent any
     environment {
         GRADLE_OPTS = "-Dorg.gradle.jvmargs='-Xmx1024m'"
     }
