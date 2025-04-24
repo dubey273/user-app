@@ -1,3 +1,8 @@
+options {
+    skipDefaultCheckout()
+    disableConcurrentBuilds()
+}
+
 pipeline {
     agent any
 
