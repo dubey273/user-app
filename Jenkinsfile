@@ -30,6 +30,25 @@ pipeline {
                 sh './gradlew bootJar'
             }
         }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    dockerImage = docker.build("your-dockerhub-username/user-app:${env.BUILD_NUMBER}")
+                }
+            }
+        }
+/*
+        stage('Push Docker Image') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: '87c161d9-85f0-43ee-a077-345a05efa48f', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    script {
+                        sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
+                        dockerImage.push()
+                    }
+                }
+            }
+        } */
     }
 
     post {
