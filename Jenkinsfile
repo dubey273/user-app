@@ -1,11 +1,4 @@
 pipeline {
-     agent {
-            docker {
-                image 'docker:latest'
-                args '-v /var/run/docker.sock:/var/run/docker.sock'
-            }
-        }
-
 
     environment {
         GRADLE_OPTS = "-Dorg.gradle.jvmargs='-Xmx1024m'"
