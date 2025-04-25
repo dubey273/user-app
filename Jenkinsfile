@@ -1,3 +1,4 @@
+def dockerImage
 pipeline {
     agent any
     environment {
@@ -32,7 +33,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                   def dockerImage = docker.build("rdubey273/user-app:${env.BUILD_NUMBER}")
+                   dockerImage = docker.build("rdubey273/user-app:${env.BUILD_NUMBER}")
                 }
             }
         }
