@@ -44,7 +44,7 @@ pipeline {
                            sh 'env | grep -i registry || echo "No registry env vars found"'
                            script {
                                try {
-                                   withCredentials([usernamePassword(credentialsId: '78a67b33-ee0d-41f0-911d-6a292eea3ac7', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                                   withCredentials([usernamePassword(credentialsId: 'docker-hub-id', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                                        echo "Inside withCredentials: Username is $DOCKER_USER"
                                        sh "echo \$DOCKER_PASS | docker login index.docker.io -u \$DOCKER_USER --password-stdin"
                                        echo "Pushing Docker image ${DOCKERHUB_REGISTRY}:${env.BUILD_NUMBER} to Docker Hub"
