@@ -38,6 +38,15 @@ pipeline {
             }
         }
 
+         stage('Push Docker Image Test') {
+                   steps {
+                   docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-id') {
+                               docker.image('your-image-name').push()
+                           }
+
+                   }
+         }
+/*
         stage('Push Docker Image') {
            steps {
                            echo "Entering Push Docker Image stage"
@@ -58,7 +67,7 @@ pipeline {
                        }
         }
     }
-
+*/
     post {
         always {
             junit 'build/test-results/test/*.xml'
