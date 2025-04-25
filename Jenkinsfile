@@ -40,10 +40,11 @@ pipeline {
 
          stage('Push Docker Image Test') {
                    steps {
+                   script {
                    docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-id') {
                                docker.image('your-image-name').push()
                            }
-
+                       }
                    }
          }
 /*
