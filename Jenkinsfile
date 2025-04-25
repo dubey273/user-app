@@ -41,10 +41,18 @@ pipeline {
          stage('Push Docker Image Test') {
                    steps {
                    script {
+                    try {
                    docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-id') {
                                docker.image('your-image-name').push()
                            }
+                           }
+                           catch (Exception e) {
+                                                              echo "Push failed: ${e.getMessage()}"
+                                                              error "Push Docker Image stage failed"
+                                                          }
+
                        }
+
                    }
          }
 /*
