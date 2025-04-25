@@ -43,7 +43,7 @@ pipeline {
                    script {
                     try {
                    docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-id') {
-                               docker.image('your-image-name').push()
+                               dockerImage.push()
                            }
                            }
                            catch (Exception e) {
