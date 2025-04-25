@@ -42,6 +42,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: '87c161d9-85f0-43ee-a077-345a05efa48f', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     script {
+                        echo "Logging in to Docker Hub as $DOCKER_USER"
                         sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
                         dockerImage.push()
                     }
