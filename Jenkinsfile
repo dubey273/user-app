@@ -32,7 +32,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("your-dockerhub-username/user-app:${env.BUILD_NUMBER}")
+                   def dockerImage = docker.build("rdubey273/user-app:${env.BUILD_NUMBER}")
                 }
             }
         }
