@@ -1,11 +1,6 @@
 def dockerImage
 pipeline {
     agent any
-    tools {
-            // Reference the SonarQube Scanner tool configured in Global Tool Configuration
-            sonarQubeScanner 'SonarQubeScanner'
-     }
-
     environment {
         GRADLE_OPTS = "-Dorg.gradle.jvmargs='-Xmx1024m'"
     }
