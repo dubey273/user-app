@@ -24,11 +24,21 @@ pipeline {
             }
         }
 
+        stage('SonarQube Analysis') {
+                    steps {
+                        // Run SonarQube analysis
+                        withSonarQubeEnv('SonarQube') { // 'SonarQube' is the name of the SonarQube server configured in Jenkins
+                            sh 'sonar-scanner'
+                        }
+                    }
+          }
+
         stage('Package') {
             steps {
                 sh './gradlew bootJar'
             }
         }
+
 
         stage('Build Docker Image') {
             steps {
