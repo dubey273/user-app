@@ -28,7 +28,7 @@ pipeline {
                     steps {
                         script {
                             try {
-                                withSonarQubeEnv(credentialsId: 'sonarqube-token', installationName: 'SonarQube') {
+                                withSonarQubeEnv(credentialsId: 'sonar-qube', installationName: 'SonarQube') {
                                     sh '''
                                         echo "Running sonar-scanner in $(pwd)"
                                         sonar-scanner --debug
