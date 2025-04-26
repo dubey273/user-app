@@ -1,6 +1,11 @@
 def dockerImage
 pipeline {
     agent any
+    tools {
+            // Reference the SonarQube Scanner tool configured in Global Tool Configuration
+            sonarQubeScanner 'SonarQubeScanner'
+     }
+
     environment {
         GRADLE_OPTS = "-Dorg.gradle.jvmargs='-Xmx1024m'"
     }
@@ -26,12 +31,21 @@ pipeline {
 
         stage('SonarQube Analysis') {
                     steps {
-                        // Run SonarQube analysis
-                        withSonarQubeEnv('SonarQube') { // 'SonarQube' is the name of the SonarQube server configured in Jenkins
-                            sh 'sonar-scanner'
+                        script {
+                            try {
+                                withSonarQubeEnv(credentialsId: 'sonarqube-token', installationName: 'SonarQube') {
+                                    sh '''
+                                        echo "Running sonar-scanner in $(pwd)"
+                                        sonar-scanner --debug
+                                    '''
+                                }
+                            } catch (Exception e) {
+                                echo "SonarQube analysis failed: ${e.getMessage()}"
+                                error "Pipeline aborted due to SonarQube analysis failure: ${e.getMessage()}"
+                            }
                         }
                     }
-          }
+                }
 
         stage('Package') {
             steps {
