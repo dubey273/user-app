@@ -15,7 +15,7 @@ public class UserController {
     @GetMapping("/user")
     public String get(){
         meterRegistry.counter("custom_endpoint_hits_total").increment();
-        log.info("New get request");
+        log.info("New get request added");
         return "demo";
     }
 }
