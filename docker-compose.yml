@@ -1,12 +1,8 @@
+version: '3.8'
 services:
   user-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: rdubey273/user-app:${BUILD_NUMBER}
     ports:
       - "8080:8080"
-    logging:
-      driver: fluentd
-      options:
-        fluentd-address: host.docker.internal:24224
-        tag: user-app
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
