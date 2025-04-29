@@ -74,7 +74,7 @@ pipeline {
 
                    }
          }
-/*
+
         stage('Push Docker Image') {
            steps {
                            echo "Entering Push Docker Image stage"
@@ -94,7 +94,28 @@ pipeline {
                            }
                        }
         }
-*/
+
+                stage('Deploy') {
+                    steps {
+                        script {
+                            try {
+                                // Stop and remove any existing containers to avoid conflicts
+                                sh 'docker-compose down || true'
+                                // Set the BUILD_NUMBER environment variable for docker-compose
+                                withEnv(["BUILD_NUMBER=${env.BUILD_NUMBER}"]) {
+                                    // Run docker-compose to deploy the latest image
+                                    sh '''
+                                        echo "Deploying image ${DOCKERHUB_REGISTRY}:${BUILD_NUMBER}"
+                                        docker-compose -f docker-compose.yml up -d
+                                    '''
+                                }
+                            } catch (Exception e) {
+                                echo "Deployment failed: ${e.getMessage()}"
+                                error "Deploy stage failed"
+                            }
+                        }
+                    }
+                }
 }
     post {
         always {
