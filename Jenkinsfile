@@ -3,6 +3,7 @@ pipeline {
     agent any
     environment {
         GRADLE_OPTS = "-Dorg.gradle.jvmargs='-Xmx1024m'"
+        DOCKERHUB_REGISTRY = 'rdubey273/user-app'
     }
 
     stages {
