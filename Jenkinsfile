@@ -76,7 +76,7 @@ pipeline {
                    }
          }
 
-        stage('Push Docker Image') {
+      /*  stage('Push Docker Image') {
            steps {
                            echo "Entering Push Docker Image stage"
                            sh 'env | grep -i registry || echo "No registry env vars found"'
@@ -94,7 +94,7 @@ pipeline {
                                }
                            }
                        }
-        }
+        }*/
 
                 stage('Deploy') {
                     steps {
