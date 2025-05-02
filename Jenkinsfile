@@ -14,14 +14,14 @@ pipeline {
             }
         }
 
-/*        stage('Snyk Vulnerability Scan') {
+       stage('Snyk Vulnerability Scan') {
             steps {
                 script {
                     sh 'snyk auth $SNYK_TOKEN'
                     sh 'snyk test --all-projects'
                 }
             }
-        }*/
+        }
 
         stage('Build') {
             steps {
