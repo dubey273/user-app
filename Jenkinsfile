@@ -4,12 +4,22 @@ pipeline {
     environment {
         GRADLE_OPTS = "-Dorg.gradle.jvmargs='-Xmx1024m'"
         DOCKERHUB_REGISTRY = 'rdubey273/user-app'
+        SNYK_TOKEN = credentials('0220ab2e-e7e8-4441-a3c1-fefd461ce6e1')
     }
 
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/dubey273/user-app'
+            }
+        }
+
+        stage('Snyk Vulnerability Scan') {
+            steps {
+                script {
+                    sh 'snyk auth $SNYK_TOKEN'
+                    sh 'snyk test --all-projects'
+                }
             }
         }
 
