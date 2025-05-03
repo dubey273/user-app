@@ -4,7 +4,7 @@ pipeline {
     environment {
         GRADLE_OPTS = "-Dorg.gradle.jvmargs='-Xmx1024m'"
         DOCKERHUB_REGISTRY = 'rdubey273/user-app'
-        SNYK_TOKEN = credentials('synk-id')
+        SNYK_TOKEN = credentials('SNYK_TOKEN')
     }
 
     stages {
